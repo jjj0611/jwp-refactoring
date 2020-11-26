@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kitchenpos.product.model.Product;
-import kitchenpos.product.application.dto.ProductCreateRequestDto;
+import kitchenpos.product.application.dto.ProductRequestDto;
 import kitchenpos.product.application.dto.ProductResponseDto;
 import kitchenpos.product.repository.ProductRepository;
 
@@ -19,8 +19,8 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductResponseDto create(final ProductCreateRequestDto productCreateRequestDto) {
-        Product product = productCreateRequestDto.toEntity();
+    public ProductResponseDto create(final ProductRequestDto productRequestDto) {
+        Product product = productRequestDto.toEntity();
         Product saved = productRepository.save(product);
         return ProductResponseDto.from(saved);
     }

@@ -2,14 +2,14 @@ package kitchenpos.menuproduct.application.dto;
 
 import kitchenpos.menuproduct.model.MenuProduct;
 
-public class MenuProductCreateRequestDto {
+public class MenuProductRequestDto {
     private Long productId;
     private long quantity;
 
-    private MenuProductCreateRequestDto() {
+    private MenuProductRequestDto() {
     }
 
-    public MenuProductCreateRequestDto(Long productId, long quantity) {
+    public MenuProductRequestDto(Long productId, long quantity) {
         this.productId = productId;
         this.quantity = quantity;
     }

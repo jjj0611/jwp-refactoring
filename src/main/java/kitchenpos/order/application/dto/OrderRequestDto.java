@@ -5,17 +5,17 @@ import java.util.List;
 
 import kitchenpos.order.model.Order;
 import kitchenpos.order.model.OrderStatus;
-import kitchenpos.orderline.application.dto.OrderLineCreateRequestDto;
+import kitchenpos.orderline.application.dto.OrderLineRequestDto;
 
-public class OrderCreateRequestDto {
+public class OrderRequestDto {
     private Long orderTableId;
-    private List<OrderLineCreateRequestDto> orderLineCreateRequests;
+    private List<OrderLineRequestDto> orderLineCreateRequests;
 
-    private OrderCreateRequestDto() {
+    private OrderRequestDto() {
     }
 
-    public OrderCreateRequestDto(Long orderTableId,
-        List<OrderLineCreateRequestDto> orderLineCreateRequests) {
+    public OrderRequestDto(Long orderTableId,
+        List<OrderLineRequestDto> orderLineCreateRequests) {
         this.orderTableId = orderTableId;
         this.orderLineCreateRequests = orderLineCreateRequests;
     }
@@ -24,7 +24,7 @@ public class OrderCreateRequestDto {
         return orderTableId;
     }
 
-    public List<OrderLineCreateRequestDto> getOrderLineCreateRequests() {
+    public List<OrderLineRequestDto> getOrderLineCreateRequests() {
         return orderLineCreateRequests;
     }
 

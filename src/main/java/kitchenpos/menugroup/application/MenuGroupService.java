@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kitchenpos.menugroup.model.MenuGroup;
-import kitchenpos.menugroup.application.dto.MenuGroupCreateRequestDto;
+import kitchenpos.menugroup.application.dto.MenuGroupRequestDto;
 import kitchenpos.menugroup.application.dto.MenuGroupResponseDto;
 import kitchenpos.menugroup.repository.MenuGroupRepository;
 
@@ -19,7 +19,7 @@ public class MenuGroupService {
     }
 
     @Transactional
-    public MenuGroupResponseDto create(final MenuGroupCreateRequestDto menuGroupCreateRequest) {
+    public MenuGroupResponseDto create(final MenuGroupRequestDto menuGroupCreateRequest) {
         MenuGroup menuGroup = menuGroupCreateRequest.toEntity();
         MenuGroup saved = menuGroupRepository.save(menuGroup);
         return MenuGroupResponseDto.from(saved);

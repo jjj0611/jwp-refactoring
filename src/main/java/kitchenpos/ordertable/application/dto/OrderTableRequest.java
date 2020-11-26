@@ -1,10 +1,10 @@
 package kitchenpos.ordertable.application.dto;
 
-public class OrderTableCreateRequest {
+public class OrderTableRequest {
     private int numberOfGuests;
     private boolean empty;
 
-    private OrderTableCreateRequest() {
+    private OrderTableRequest() {
         this.numberOfGuests = 0;
         this.empty = true;
     }

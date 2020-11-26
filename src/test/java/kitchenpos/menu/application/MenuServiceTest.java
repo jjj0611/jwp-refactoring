@@ -19,8 +19,8 @@ import kitchenpos.menu.model.Menu;
 import kitchenpos.menugroup.model.MenuGroup;
 import kitchenpos.menuproduct.model.MenuProduct;
 import kitchenpos.product.model.Product;
-import kitchenpos.menu.application.dto.MenuCreateRequestDto;
-import kitchenpos.menuproduct.application.dto.MenuProductCreateRequestDto;
+import kitchenpos.menu.application.dto.MenuRequestDto;
+import kitchenpos.menuproduct.application.dto.MenuProductRequestDto;
 import kitchenpos.menu.application.dto.MenuResponseDto;
 import kitchenpos.menugroup.repository.MenuGroupRepository;
 import kitchenpos.menuproduct.repository.MenuProductRepository;
@@ -48,8 +48,8 @@ class MenuServiceTest extends ServiceTest {
     void create() {
         MenuGroup menuGroup = menuGroupRepository.save(new MenuGroup(null, "백마리치킨"));
         Product product = productRepository.save(new Product(null, "양념치킨", BigDecimal.valueOf(18_000)));
-        MenuProductCreateRequestDto menuProductCreateRequest = new MenuProductCreateRequestDto(product.getId(), 1);
-        MenuCreateRequestDto menuCreateRequest = new MenuCreateRequestDto("양념치킨", BigDecimal.valueOf(18_000),
+        MenuProductRequestDto menuProductCreateRequest = new MenuProductRequestDto(product.getId(), 1);
+        MenuRequestDto menuCreateRequest = new MenuRequestDto("양념치킨", BigDecimal.valueOf(18_000),
             menuGroup.getId(),
             Collections.singletonList(menuProductCreateRequest));
 
@@ -71,8 +71,8 @@ class MenuServiceTest extends ServiceTest {
     @NullSource
     void create_NonExistingMenuGroup_ThrownException(Long menuGroupId) {
         Product product = productRepository.save(new Product(null, "양념치킨", BigDecimal.valueOf(18_000)));
-        MenuProductCreateRequestDto menuProductCreateRequest = new MenuProductCreateRequestDto(product.getId(), 1);
-        MenuCreateRequestDto menuCreateRequest = new MenuCreateRequestDto("양념치킨", BigDecimal.valueOf(18_000),
+        MenuProductRequestDto menuProductCreateRequest = new MenuProductRequestDto(product.getId(), 1);
+        MenuRequestDto menuCreateRequest = new MenuRequestDto("양념치킨", BigDecimal.valueOf(18_000),
             menuGroupId, Collections.singletonList(menuProductCreateRequest));
 
         assertThatThrownBy(() -> menuService.create(menuCreateRequest))
@@ -84,8 +84,8 @@ class MenuServiceTest extends ServiceTest {
     void create_OverSumOfProductsPrice_ThrownException() {
         MenuGroup menuGroup = menuGroupRepository.save(new MenuGroup(null, "백마리치킨"));
         Product product = productRepository.save(new Product(null, "양념치킨", BigDecimal.valueOf(18_000)));
-        MenuProductCreateRequestDto menuProductCreateRequest = new MenuProductCreateRequestDto(product.getId(), 1);
-        MenuCreateRequestDto menuCreateRequest = new MenuCreateRequestDto("양념치킨", BigDecimal.valueOf(18_001),
+        MenuProductRequestDto menuProductCreateRequest = new MenuProductRequestDto(product.getId(), 1);
+        MenuRequestDto menuCreateRequest = new MenuRequestDto("양념치킨", BigDecimal.valueOf(18_001),
             menuGroup.getId(), Collections.singletonList(menuProductCreateRequest));
 
         assertThatThrownBy(() -> menuService.create(menuCreateRequest))
@@ -98,8 +98,8 @@ class MenuServiceTest extends ServiceTest {
     @NullSource
     void create_NonExistingProductId_ThrownException(Long productId) {
         MenuGroup menuGroup = menuGroupRepository.save(new MenuGroup(null, "백마리치킨"));
-        MenuProductCreateRequestDto menuProductCreateRequest = new MenuProductCreateRequestDto(productId, 1);
-        MenuCreateRequestDto menuCreateRequest = new MenuCreateRequestDto("양념치킨", BigDecimal.valueOf(18_000),
+        MenuProductRequestDto menuProductCreateRequest = new MenuProductRequestDto(productId, 1);
+        MenuRequestDto menuCreateRequest = new MenuRequestDto("양념치킨", BigDecimal.valueOf(18_000),
             menuGroup.getId(), Collections.singletonList(menuProductCreateRequest));
 
         assertThatThrownBy(() -> menuService.create(menuCreateRequest))

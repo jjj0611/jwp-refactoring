@@ -21,8 +21,8 @@ import kitchenpos.menuproduct.model.MenuProduct;
 import kitchenpos.order.model.OrderStatus;
 import kitchenpos.ordertable.model.OrderTable;
 import kitchenpos.product.model.Product;
-import kitchenpos.order.application.dto.OrderCreateRequestDto;
-import kitchenpos.orderline.application.dto.OrderLineCreateRequestDto;
+import kitchenpos.order.application.dto.OrderRequestDto;
+import kitchenpos.orderline.application.dto.OrderLineRequestDto;
 import kitchenpos.order.application.dto.OrderResponseDto;
 import kitchenpos.menugroup.repository.MenuGroupRepository;
 import kitchenpos.menuproduct.repository.MenuProductRepository;
@@ -58,12 +58,12 @@ class OrderServiceTest extends ServiceTest {
         Menu menu = menuRepository.save(new Menu(null, "후라이드치킨", BigDecimal.valueOf(18_000), menuGroup.getId()));
         MenuProduct menuProduct = new MenuProduct(null, menu.getId(), product.getId(), 1);
         menuProductRepository.save(menuProduct);
-        List<OrderLineCreateRequestDto> orderLineCreateRequests = Collections.singletonList(
-            new OrderLineCreateRequestDto(menu.getId(), 1));
-        OrderCreateRequestDto orderCreateRequestDto = new OrderCreateRequestDto(orderTable.getId(),
+        List<OrderLineRequestDto> orderLineCreateRequests = Collections.singletonList(
+            new OrderLineRequestDto(menu.getId(), 1));
+        OrderRequestDto orderRequestDto = new OrderRequestDto(orderTable.getId(),
             orderLineCreateRequests);
 
-        OrderResponseDto orderResponse = orderService.create(orderCreateRequestDto);
+        OrderResponseDto orderResponse = orderService.create(orderRequestDto);
 
         assertThat(orderResponse.getId()).isNotNull();
     }
@@ -75,9 +75,9 @@ class OrderServiceTest extends ServiceTest {
     void create_WithNonExistingTable_ThrownException(Long tableId) {
         MenuGroup menuGroup = menuGroupRepository.save(new MenuGroup(null, "한마리치킨"));
         Menu menu = menuRepository.save(new Menu(null, "후라이드치킨", BigDecimal.valueOf(18_000), menuGroup.getId()));
-        List<OrderLineCreateRequestDto> orderLineCreateRequests = Collections.singletonList(
-            new OrderLineCreateRequestDto(menu.getId(), 1));
-        OrderCreateRequestDto orderCreateRequest = new OrderCreateRequestDto(tableId, orderLineCreateRequests);
+        List<OrderLineRequestDto> orderLineCreateRequests = Collections.singletonList(
+            new OrderLineRequestDto(menu.getId(), 1));
+        OrderRequestDto orderCreateRequest = new OrderRequestDto(tableId, orderLineCreateRequests);
 
         assertThatThrownBy(() -> orderService.create(orderCreateRequest))
             .isInstanceOf(IllegalArgumentException.class);
@@ -91,9 +91,9 @@ class OrderServiceTest extends ServiceTest {
         Product product = productRepository.save(new Product(null, "후라이드치킨", BigDecimal.valueOf(18_000)));
         Menu menu = menuRepository.save(new Menu(null, "후라이드치킨", BigDecimal.valueOf(18_000), menuGroup.getId()));
         menuProductRepository.save(new MenuProduct(null, menu.getId(), product.getId(), 1));
-        List<OrderLineCreateRequestDto> orderLineCreateRequests = Collections.singletonList(
-            new OrderLineCreateRequestDto(menu.getId(), 1));
-        OrderCreateRequestDto orderCreateRequest = new OrderCreateRequestDto(orderTable.getId(),
+        List<OrderLineRequestDto> orderLineCreateRequests = Collections.singletonList(
+            new OrderLineRequestDto(menu.getId(), 1));
+        OrderRequestDto orderCreateRequest = new OrderRequestDto(orderTable.getId(),
             orderLineCreateRequests);
 
         assertThatThrownBy(() -> orderService.create(orderCreateRequest))
@@ -104,7 +104,7 @@ class OrderServiceTest extends ServiceTest {
     @Test
     void create_WithZeroOrderList_ThrownException() {
         OrderTable orderTable = orderTableRepository.save(new OrderTable(null, null, 2, false));
-        OrderCreateRequestDto orderCreateRequest = new OrderCreateRequestDto(orderTable.getId(),
+        OrderRequestDto orderCreateRequest = new OrderRequestDto(orderTable.getId(),
             Collections.EMPTY_LIST);
 
         assertThatThrownBy(() -> orderService.create(orderCreateRequest))
@@ -117,9 +117,9 @@ class OrderServiceTest extends ServiceTest {
     @NullSource
     void create__ThrownException(Long menuId) {
         OrderTable orderTable = orderTableRepository.save(new OrderTable(null, null, 2, false));
-        List<OrderLineCreateRequestDto> orderLineCreateRequests = Collections.singletonList(
-            new OrderLineCreateRequestDto(menuId, 1));
-        OrderCreateRequestDto orderCreateRequest = new OrderCreateRequestDto(orderTable.getId(),
+        List<OrderLineRequestDto> orderLineCreateRequests = Collections.singletonList(
+            new OrderLineRequestDto(menuId, 1));
+        OrderRequestDto orderCreateRequest = new OrderRequestDto(orderTable.getId(),
             orderLineCreateRequests);
 
         assertThatThrownBy(() -> orderService.create(orderCreateRequest))
@@ -134,9 +134,9 @@ class OrderServiceTest extends ServiceTest {
         Product product = productRepository.save(new Product(null, "후라이드치킨", BigDecimal.valueOf(18_000)));
         Menu menu = menuRepository.save(new Menu(null, "후라이드치킨", BigDecimal.valueOf(18_000), menuGroup.getId()));
         menuProductRepository.save(new MenuProduct(null, menu.getId(), product.getId(), 1));
-        List<OrderLineCreateRequestDto> orderLineCreateRequests = Collections.singletonList(
-            new OrderLineCreateRequestDto(menu.getId(), 1));
-        OrderCreateRequestDto orderCreateRequest = new OrderCreateRequestDto(orderTable.getId(),
+        List<OrderLineRequestDto> orderLineCreateRequests = Collections.singletonList(
+            new OrderLineRequestDto(menu.getId(), 1));
+        OrderRequestDto orderCreateRequest = new OrderRequestDto(orderTable.getId(),
             orderLineCreateRequests);
         orderService.create(orderCreateRequest);
 
@@ -154,9 +154,9 @@ class OrderServiceTest extends ServiceTest {
         Product product = productRepository.save(new Product(null, "후라이드치킨", BigDecimal.valueOf(18_000)));
         Menu menu = menuRepository.save(new Menu(null, "후라이드치킨", BigDecimal.valueOf(18_000), menuGroup.getId()));
         menuProductRepository.save(new MenuProduct(null, menu.getId(), product.getId(), 1));
-        List<OrderLineCreateRequestDto> orderLineCreateRequests = Collections.singletonList(
-            new OrderLineCreateRequestDto(menu.getId(), 1));
-        OrderCreateRequestDto orderCreateRequest = new OrderCreateRequestDto(orderTable.getId(),
+        List<OrderLineRequestDto> orderLineCreateRequests = Collections.singletonList(
+            new OrderLineRequestDto(menu.getId(), 1));
+        OrderRequestDto orderCreateRequest = new OrderRequestDto(orderTable.getId(),
             orderLineCreateRequests);
         OrderResponseDto orderResponse = orderService.create(orderCreateRequest);
 

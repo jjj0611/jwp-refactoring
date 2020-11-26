@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kitchenpos.order.application.OrderService;
 import kitchenpos.order.model.OrderStatus;
-import kitchenpos.order.application.dto.OrderCreateRequestDto;
+import kitchenpos.order.application.dto.OrderRequestDto;
 import kitchenpos.order.application.dto.OrderResponseDto;
 
 @RestController
@@ -25,7 +25,7 @@ public class OrderRestController {
     }
 
     @PostMapping("/api/orders")
-    public ResponseEntity<OrderResponseDto> create(@RequestBody final OrderCreateRequestDto orderCreateRequest) {
+    public ResponseEntity<OrderResponseDto> create(@RequestBody final OrderRequestDto orderCreateRequest) {
         final OrderResponseDto orderResponse = orderService.create(orderCreateRequest);
         final URI uri = URI.create("/api/orders/" + orderResponse.getId());
         return ResponseEntity.created(uri)

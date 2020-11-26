@@ -2,14 +2,14 @@ package kitchenpos.orderline.application.dto;
 
 import kitchenpos.orderline.model.OrderLineItem;
 
-public class OrderLineCreateRequestDto {
+public class OrderLineRequestDto {
     private Long menuId;
     private long quantity;
 
-    private OrderLineCreateRequestDto() {
+    private OrderLineRequestDto() {
     }
 
-    public OrderLineCreateRequestDto(Long menuId, long quantity) {
+    public OrderLineRequestDto(Long menuId, long quantity) {
         this.menuId = menuId;
         this.quantity = quantity;
     }

@@ -2,13 +2,13 @@ package kitchenpos.tablegroup.application.dto;
 
 import java.util.List;
 
-public class TableGroupCreateRequestDto {
+public class TableGroupRequestDto {
     private List<Long> orderTableIds;
 
-    private TableGroupCreateRequestDto() {
+    private TableGroupRequestDto() {
     }
 
-    public TableGroupCreateRequestDto(List<Long> orderTableIds) {
+    public TableGroupRequestDto(List<Long> orderTableIds) {
         this.orderTableIds = orderTableIds;
     }
 

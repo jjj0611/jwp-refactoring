@@ -14,7 +14,7 @@ import kitchenpos.ordertable.repository.OrderTableRepository;
 import kitchenpos.tablegroup.repository.TableGroupRepository;
 import kitchenpos.tablegroup.model.TableGroup;
 import kitchenpos.tablegroup.model.TableGroupVerifier;
-import kitchenpos.tablegroup.application.dto.TableGroupCreateRequestDto;
+import kitchenpos.tablegroup.application.dto.TableGroupRequestDto;
 import kitchenpos.tablegroup.application.dto.TableGroupResponseDto;
 
 @Service
@@ -31,8 +31,8 @@ public class TableGroupService {
     }
 
     @Transactional
-    public TableGroupResponseDto create(final TableGroupCreateRequestDto tableGroupCreateRequestDto) {
-        final List<Long> orderTableIds = tableGroupCreateRequestDto.getOrderTableIds();
+    public TableGroupResponseDto create(final TableGroupRequestDto tableGroupRequestDto) {
+        final List<Long> orderTableIds = tableGroupRequestDto.getOrderTableIds();
         final List<OrderTable> savedOrderTables = orderTableRepository.findAllById(orderTableIds);
 
         TableGroupVerifier.validate(orderTableIds, savedOrderTables.size());

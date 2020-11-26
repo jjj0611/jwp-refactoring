@@ -13,8 +13,8 @@ import kitchenpos.orderline.model.OrderLineItem;
 import kitchenpos.order.model.OrderStatus;
 import kitchenpos.ordertable.model.OrderTable;
 import kitchenpos.order.model.OrderVerifier;
-import kitchenpos.order.application.dto.OrderCreateRequestDto;
-import kitchenpos.orderline.application.dto.OrderLineCreateRequestDto;
+import kitchenpos.order.application.dto.OrderRequestDto;
+import kitchenpos.orderline.application.dto.OrderLineRequestDto;
 import kitchenpos.order.application.dto.OrderResponseDto;
 import kitchenpos.menu.repository.MenuRepository;
 import kitchenpos.orderline.repository.OrderLineItemRepository;
@@ -41,9 +41,9 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderResponseDto create(final OrderCreateRequestDto orderCreateRequest) {
+    public OrderResponseDto create(final OrderRequestDto orderCreateRequest) {
         final List<OrderLineItem> orderLineItems = orderCreateRequest.getOrderLineCreateRequests().stream()
-            .map(OrderLineCreateRequestDto::toEntity)
+            .map(OrderLineRequestDto::toEntity)
             .collect(Collectors.toList());
 
         final List<Long> menuIds = orderLineItems.stream()

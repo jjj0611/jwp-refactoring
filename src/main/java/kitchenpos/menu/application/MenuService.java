@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kitchenpos.product.model.Product;
-import kitchenpos.menu.application.dto.MenuCreateRequestDto;
-import kitchenpos.menuproduct.application.dto.MenuProductCreateRequestDto;
+import kitchenpos.menu.application.dto.MenuRequestDto;
+import kitchenpos.menuproduct.application.dto.MenuProductRequestDto;
 import kitchenpos.menu.application.dto.MenuResponseDto;
 import kitchenpos.menu.model.Menu;
 import kitchenpos.menuproduct.model.MenuProduct;
@@ -40,14 +40,14 @@ public class MenuService {
     }
 
     @Transactional
-    public MenuResponseDto create(final MenuCreateRequestDto menuCreateRequest) {
+    public MenuResponseDto create(final MenuRequestDto menuCreateRequest) {
         validateMenuGroupExistence(menuCreateRequest.getMenuGroupId());
 
         final List<Long> productsIds = menuCreateRequest.getMenuProductRequestDto().stream()
-            .map(MenuProductCreateRequestDto::getProductId)
+            .map(MenuProductRequestDto::getProductId)
             .collect(Collectors.toList());
         final List<MenuProduct> menuProducts = menuCreateRequest.getMenuProductRequestDto().stream()
-            .map(MenuProductCreateRequestDto::toEntity)
+            .map(MenuProductRequestDto::toEntity)
             .collect(Collectors.toList());
         final List<Product> products = productRepository.findAllById(productsIds);
 

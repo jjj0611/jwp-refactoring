@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 
 import kitchenpos.product.model.Product;
 
-public class ProductCreateRequestDto {
+public class ProductRequestDto {
     private String name;
     private BigDecimal price;
 
-    private ProductCreateRequestDto() {
+    private ProductRequestDto() {
     }
 
-    public ProductCreateRequestDto(String name, BigDecimal price) {
+    public ProductRequestDto(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
     }

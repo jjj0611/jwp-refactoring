@@ -20,7 +20,7 @@ import kitchenpos.ServiceTest;
 import kitchenpos.order.model.Order;
 import kitchenpos.order.model.OrderStatus;
 import kitchenpos.ordertable.model.OrderTable;
-import kitchenpos.tablegroup.application.dto.TableGroupCreateRequestDto;
+import kitchenpos.tablegroup.application.dto.TableGroupRequestDto;
 import kitchenpos.tablegroup.application.dto.TableGroupResponseDto;
 import kitchenpos.order.repository.OrderRepository;
 import kitchenpos.ordertable.repository.OrderTableRepository;
@@ -40,7 +40,7 @@ class TableGroupServiceTest extends ServiceTest {
     void create() {
         OrderTable orderTable1 = orderTableRepository.save(new OrderTable(null, null, 0, true));
         OrderTable orderTable2 = orderTableRepository.save(new OrderTable(null, null, 0, true));
-        TableGroupCreateRequestDto tableGroupCreateRequest = new TableGroupCreateRequestDto(
+        TableGroupRequestDto tableGroupCreateRequest = new TableGroupRequestDto(
             Arrays.asList(orderTable1.getId(), orderTable2.getId()));
 
         TableGroupResponseDto tableGroupResponse = tableGroupService.create(tableGroupCreateRequest);
@@ -63,7 +63,7 @@ class TableGroupServiceTest extends ServiceTest {
         List<Long> orderTableIds = orderTables.stream()
             .map(OrderTable::getId)
             .collect(Collectors.toList());
-        TableGroupCreateRequestDto tableGroupCreateRequest = new TableGroupCreateRequestDto(orderTableIds);
+        TableGroupRequestDto tableGroupCreateRequest = new TableGroupRequestDto(orderTableIds);
 
         assertThatThrownBy(() -> tableGroupService.create(tableGroupCreateRequest))
             .isInstanceOf(IllegalArgumentException.class);
@@ -74,7 +74,7 @@ class TableGroupServiceTest extends ServiceTest {
     void create_WithNonExistingTable_ThrownException() {
         OrderTable savedTable = orderTableRepository.save(new OrderTable(null, null, 0, true));
         OrderTable notSavedTable = new OrderTable(null, null, 2, true);
-        TableGroupCreateRequestDto tableGroupCreateRequest = new TableGroupCreateRequestDto(
+        TableGroupRequestDto tableGroupCreateRequest = new TableGroupRequestDto(
             Arrays.asList(savedTable.getId(), notSavedTable.getId()));
 
         assertThatThrownBy(() -> tableGroupService.create(tableGroupCreateRequest))
@@ -87,7 +87,7 @@ class TableGroupServiceTest extends ServiceTest {
         OrderTable orderTable1 = orderTableRepository.save(new OrderTable(null, null, 0, true));
         OrderTable orderTable2 = orderTableRepository.save(new OrderTable(null, null, 0, true));
         TableGroupResponseDto tableGroupResponse = tableGroupService.create(
-            new TableGroupCreateRequestDto(Arrays.asList(orderTable1.getId(), orderTable2.getId())));
+            new TableGroupRequestDto(Arrays.asList(orderTable1.getId(), orderTable2.getId())));
 
         tableGroupService.ungroup(tableGroupResponse.getId());
 
@@ -103,7 +103,7 @@ class TableGroupServiceTest extends ServiceTest {
         OrderTable orderTable1 = orderTableRepository.save(new OrderTable(null, null, 0, true));
         OrderTable orderTable2 = orderTableRepository.save(new OrderTable(null, null, 0, true));
         TableGroupResponseDto tableGroupResponse = tableGroupService.create(
-            new TableGroupCreateRequestDto(Arrays.asList(orderTable1.getId(), orderTable2.getId())));
+            new TableGroupRequestDto(Arrays.asList(orderTable1.getId(), orderTable2.getId())));
         orderRepository.save(new Order(null, orderTable1.getId(), status, LocalDateTime.now()));
 
         assertThatThrownBy(() -> tableGroupService.ungroup(tableGroupResponse.getId()))

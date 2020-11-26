@@ -4,23 +4,23 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import kitchenpos.menu.model.Menu;
-import kitchenpos.menuproduct.application.dto.MenuProductCreateRequestDto;
+import kitchenpos.menuproduct.application.dto.MenuProductRequestDto;
 
-public class MenuCreateRequestDto {
+public class MenuRequestDto {
     private String name;
     private BigDecimal price;
     private Long menuGroupId;
-    private List<MenuProductCreateRequestDto> menuProductCreateRequestDto;
+    private List<MenuProductRequestDto> menuProductRequestDto;
 
-    private MenuCreateRequestDto() {
+    private MenuRequestDto() {
     }
 
-    public MenuCreateRequestDto(String name, BigDecimal price, Long menuGroupId,
-        List<MenuProductCreateRequestDto> menuProductCreateRequestDto) {
+    public MenuRequestDto(String name, BigDecimal price, Long menuGroupId,
+        List<MenuProductRequestDto> menuProductRequestDto) {
         this.name = name;
         this.price = price;
         this.menuGroupId = menuGroupId;
-        this.menuProductCreateRequestDto = menuProductCreateRequestDto;
+        this.menuProductRequestDto = menuProductRequestDto;
     }
 
     public String getName() {
@@ -35,8 +35,8 @@ public class MenuCreateRequestDto {
         return menuGroupId;
     }
 
-    public List<MenuProductCreateRequestDto> getMenuProductRequestDto() {
-        return menuProductCreateRequestDto;
+    public List<MenuProductRequestDto> getMenuProductRequestDto() {
+        return menuProductRequestDto;
     }
 
     public Menu toEntity() {

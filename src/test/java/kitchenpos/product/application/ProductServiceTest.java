@@ -11,9 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kitchenpos.ServiceTest;
-import kitchenpos.product.application.ProductService;
 import kitchenpos.product.model.Product;
-import kitchenpos.product.application.dto.ProductCreateRequestDto;
+import kitchenpos.product.application.dto.ProductRequestDto;
 import kitchenpos.product.application.dto.ProductResponseDto;
 import kitchenpos.product.repository.ProductRepository;
 
@@ -28,7 +27,7 @@ class ProductServiceTest extends ServiceTest {
     void create() {
         String name = "고추마요 치킨";
         BigDecimal price = BigDecimal.valueOf(18_000);
-        ProductCreateRequestDto productRequest = new ProductCreateRequestDto(name, price);
+        ProductRequestDto productRequest = new ProductRequestDto(name, price);
 
         ProductResponseDto productResponse = productService.create(productRequest);
 

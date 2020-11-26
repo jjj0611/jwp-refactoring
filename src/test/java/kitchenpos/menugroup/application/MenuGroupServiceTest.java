@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kitchenpos.ServiceTest;
-import kitchenpos.menugroup.application.dto.MenuGroupCreateRequestDto;
+import kitchenpos.menugroup.application.dto.MenuGroupRequestDto;
 import kitchenpos.menugroup.application.dto.MenuGroupResponseDto;
 import kitchenpos.menugroup.model.MenuGroup;
 import kitchenpos.menugroup.repository.MenuGroupRepository;
@@ -25,7 +25,7 @@ class MenuGroupServiceTest extends ServiceTest {
     @Test
     void create() {
         String name = "치킨";
-        MenuGroupCreateRequestDto menuGroupCreateRequest = new MenuGroupCreateRequestDto(name);
+        MenuGroupRequestDto menuGroupCreateRequest = new MenuGroupRequestDto(name);
 
         MenuGroupResponseDto menuGroupResponse = menuGroupService.create(menuGroupCreateRequest);
 

@@ -2,13 +2,13 @@ package kitchenpos.menugroup.application.dto;
 
 import kitchenpos.menugroup.model.MenuGroup;
 
-public class MenuGroupCreateRequestDto {
+public class MenuGroupRequestDto {
     private String name;
 
-    private MenuGroupCreateRequestDto() {
+    private MenuGroupRequestDto() {
     }
 
-    public MenuGroupCreateRequestDto(String name) {
+    public MenuGroupRequestDto(String name) {
         this.name = name;
     }
 
